@@ -1,0 +1,52 @@
+{
+	"stores" : [ 
+	{
+		"NAME" : "aws3",
+		"STORE_TYPE" :"S3",
+		"ACCESS" : "XXXXXX",
+		"SECRET" : "YYYYYYYYYYYYYYYYYY",
+		"REGION" : "us-east-1",
+		"ENDPOINT" : "http://s3.amazonaws.com",
+		"TOKEN" : "BCADDD34216",
+		"SSL" : "False",
+		"BUCKET" : "bigbucket",
+		"TAG" : "aws3"
+	},
+	{
+		"NAME" : "minio",
+		"STORE_TYPE" :"S3",
+		"ACCESS" : "XXXXXX",
+		"SECRET" : "YYYYYYYYYYYYYYYYYY",
+		"REGION" : "us-east-1",
+		"ENDPOINT" : "http://127.0.0.1:9000",
+		"TOKEN" : "BCADDD34216",
+		"SSL" : "False",
+		"BUCKET" : "smallbucket",
+		"TAG" : "minio"
+	},
+	{
+		"NAME" : "az",
+		"STORE_TYPE" :"azblobstore",
+		"ACCESS" : "XXXXXX",
+		"SECRET" : "YYYYYYYYYYYYYYYYYY",
+		"REGION" : "us-west-2",
+		"ENDPOINT" : "https://storagexx/azure/com",
+		"TOKEN" : "BCADDD34216",
+		"SSL" : "False",
+		"BUCKET" : "smallbucket",
+		"TAG" : "azure"
+	},
+	{
+		"NAME" : "ix",
+		"STORE_TYPE" :"FS",
+		"TOKEN" : "ECBBDD3499",
+		"BUCKET" : "/Users/meuser/homebucket/",
+		"TAG" : "homex"
+	}
+	],
+	"PRIMARY" : "aws3",
+	"SYNCIO" : "QUEUED",
+	"DEBUG" : 5,
+	"DATATEST" : "~/homebucket/data/",
+	"META" : "~/homebucket/meta"
+}

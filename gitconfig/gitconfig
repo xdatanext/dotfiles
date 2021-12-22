@@ -1,0 +1,47 @@
+# This is Git's per-user configuration file.
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	user = Xdata Next
+	email = xdatanext@outlook.com
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[user]
+	name = Xdata Next
+	email = xdatanext@outlook.com
+[push]
+	default = matching
+[color]
+	ui = auto
+[color]
+	ui = auto
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	a = add -i
+	br = branch
+	c = commit
+	cm = commit -m
+	d = diff
+	dt = difftool
+	ps = push
+

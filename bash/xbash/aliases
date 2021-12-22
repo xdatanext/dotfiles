@@ -1,0 +1,16 @@
+
+# 
+alias cls='clear'
+
+# tmux aliases
+alias tmn="tmux new -s"
+alias tmls="tmux list-sessions"
+alias tma="tmux attach-session -t"
+alias tmk="tmux kill-session -t"
+
+# jupyter ones
+alias jlab="jupyter-lab"
+
+# convert bulk of *.HEIC file to *.jpg files
+alias h2j="magick mogrify -monitor -format jpg *.HEIC"
+

@@ -1,0 +1,171 @@
+" Nabin's vimrc file -- updated March 2014 Nexenta 
+"    -- added some of my old convenient changes 
+"    -- Languages: C, C++, Python , JavaScript, Go
+"    -- Git
+"
+
+" Let's do the Vundle setup first
+
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme) 
+	echo "Installing Vundle.."
+	echo ""
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
+	let iCanHazVundle=0
+endif
+"
+set nocompatible              " be iMproved, required
+filetype off                  " required
+"
+set rtp+=~/.vim/bundle/vundle/
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+"Add your bundles here
+Plugin 'scrooloose/syntastic' "uber awesome syntax and errors highlighter
+Plugin 'NLKNguyen/papercolor-theme' 
+Plugin 'https://github.com/tpope/vim-fugitive' "So awesome, it should be illegal 
+Plugin 'vim-scripts/indentpython.vim' " Indentation
+Plugin 'fatih/vim-go'
+Plugin 'berdandy/ansiesc.vim'
+
+"...All your other bundles...
+if iCanHazVundle == 0
+	echo "Installing Vundles, please ignore key map
+	error messages"
+	echo ""
+	:PluginInstall
+endif
+call vundle#end() 
+
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" To make sure all bundles are installed
+map P :PluginInstall
+
+filetype plugin indent on
+set t_Co=256 
+" TODO: find a color scheme that works everywhere
+" colorscheme PaperColor
+syntax on
+
+" set filetype to unix. VS2010 knows how to deal with this now. 
+set ffs=unix
+
+" completion at the command line
+set wildmenu
+
+" backups
+set backupdir=~/.vim/tmp/backup/
+set backup
+
+" set the leader key as a Comma
+let mapleader = ","
+
+"
+" handy cut-paste I got from John Gray
+" note: interferes with shift-V for the visual mode
+"
+" Copy
+map C :'m,. w! $HOME/.vim/buf
+" Cut
+map X :d'm w! $HOME/.vim/buf
+" Paste
+map V : r $HOME/.vim/buf
+"
+"
+" JSON formatting using python
+map S :%!python -m json.tool
+"
+" wrap
+set wrap
+set wm=2
+set textwidth=78
+"
+" editing behaviour
+set backspace=indent,eol,start
+set showmatch
+set scrolloff=5
+" searching and matching
+set incsearch
+set completeopt=longest,preview
+" user interface
+set ruler
+set visualbell
+set laststatus=2
+
+
+" general commands that is used
+"
+set wildmode=list:longest
+set bg=dark
+set modeline
+set showmode 
+set showcmd
+set cursorline 
+set ttyfast 
+set ruler< 
+set laststatus=2
+set notitle 
+set encoding=utf-8
+
+" default only
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4 
+
+"
+" <F7>  --  do a make using the default "make" on Makefile 
+"
+function! Domake()
+	set makeprg=make
+	:make
+endfunction
+
+" abbreviations. type the first few letters and space 
+ab pymain if __name__ == "__main__":
+ab teh the
+iab #d #define
+iab #i #include
+
+set smartcase 
+
+map M :make
+noremap <F7> :call Domake() <CR>
+
+" historical : kernel coding style
+" -----------------------------------
+set formatoptions=croql
+set cino=t0,:0,(4,)100,*100
+set cindent sm wm=0 tw=0
+set cindent sm wm=0 tw=0
+set comments=sr:/*,mb:*,ex:*/,://
+let c_space_errors=1
+
+" Languages we care right now:
+" C, C++, Python, JavaScript, Go, F#
+
+autocmd FileType python set ts=4 sw=4 expandtab nocin nosi ai
+autocmd FileType python setlocal makeprg=pylint\ --output-format=parseable
+autocmd FileType python set efm=%f:%l:%m
+autocmd FileType python setlocal commentstring=#\ %s
+autocmd BufNewFile,BufRead *.cpy setfiletype python
+
+autocmd FileType html,xhtml,xml,css setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType html set ft=phtml ts=2 sw=2 expandtab
+autocmd BufNewFile,BufRead *.html setfiletype html
+
+autocmd FileType javascript set ts=4 sw=4 expandtab sts=4
+autocmd FileType javascript setlocal makeprg=eslint\ --format\ compact
+autocmd FileType javascript set efm=%f\ line\ %l\ column\ %c\ Error:\ %m
+autocmd BufNewFile,BufRead *.cjs setfiletype javascript
+autocmd BufNewFile,BufRead *.json setfiletype javascript
+
+

@@ -1,0 +1,34 @@
+# Turn off that annoying start up message
+startup_message off
+ 
+# Turn the even more annoying whole-screen-flash-on-tab-complete "feature"
+vbell off
+ 
+# Window list at the bottom. hostname, centered tabs and redmarked active windows:
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m/%d %{W}%c %{g}]'
+
+shell -${SHELL}
+#caption always "%?%{+b kw}%-Lw%?%{yK}%n*%f %t%?(%u)%?%?%{wk}%+Lw%? %{gk}%=%c %{yk}%d/%M/%Y"
+#caption always "%{rk}%H %{gk}%c %{yk}%M%d %{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
+#caption always "%>%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?%<"
+
+# start a list of windows 
+screen bash
+title "One"
+
+screen bash
+title "Two"
+
+screen bash
+title "Three"
+
+sorendition gK
+
+# 
+msgwait 1
+version
+#
+msgwait 2
+echo "Welcome :-) " 
+echo $DISPLAY

@@ -1,0 +1,87 @@
+
+# change the ls colors, blue is hard to see
+LS_COLORS='di=0;35' ; export LS_COLORS
+
+# find the OS we are on
+OS=`uname -s`
+
+# Aliases
+if [ ~/.xbash/aliases ]; then
+	. ~/.xbash/aliases
+fi
+
+# Git env
+if [ ~/.xbash/gitenv ]; then
+	. ~/.xbash/gitenv
+fi
+
+# GO env
+if [ ~/.xbash/goenv ]; then
+	. ~/.xbash/goenv
+fi
+
+# Py env
+if [ ~/.xbash/pyenv ]; then
+	. ~/.xbash/pyenv
+fi
+
+# ML specific
+
+if [ ! -d $HOME/Workspace/data ]; then
+	mkdir $HOME/Workspace/data
+else
+	if [ ! -d $HOME/Workspace/data/notebooks ]; then
+		mkdir $HOME/Workspace/data/notebooks
+	fi
+	if [ ! -d $HOME/Workspace/data/datasets ]; then
+		mkdir $HOME/Workspace/data/datasets
+	fi
+fi
+
+# main env stuff
+#
+NOTEBOOKS=/Users/$USER/data/notebooks
+DATASETS=/Users/$USER/data/datasets
+
+# Edge
+
+#OS specific definitions
+if [ $OS == "Linux" ]; then
+	echo $OS $USER $TERM_PROGRAM 
+fi
+
+if [ $OS == "Darwin" ]; then
+
+	export BASH_SILENCE_DEPRECATION_WARNING=1
+
+	echo $OS $USER $TERM_PROGRAM 
+	export PATH=/usr/local/sbin:${PATH}:~/bin:/usr/local/bin
+
+	function xserver
+	{
+		/Applications/Utilities/XQuartz.app/Contents/MacOS/X11.bin &
+	}
+	function xrox
+	{
+		xhost +localhost
+	}
+
+	# a better cat
+	alias cat='bat'
+	alias ping='prettyping '
+	alias top="sudo htop" 
+
+	# adding a path to visual studio so we can call it from Command line 
+	export PATH=${PATH}:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
+
+	export PATH=${PATH}:~/Workspace/bin
+fi
+
+
+if [ $OS == "MSYS_NT-10.0-21390" ]; then 
+
+	export PATH=${PATH}:/c/Users/xdatanext/AppData/Local/Programs/Microsoft\ VS\ Code/bin
+	export PATH=${PATH}:/c/Program\ Files/Git/bin
+
+fi
+

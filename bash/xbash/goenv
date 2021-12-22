@@ -1,0 +1,18 @@
+# create a GO environment
+export GOPATH=$HOME/go-workspace # don't forget to change your path correctly!
+#export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export GOBIN=$GOPATH/bin
+
+# Go related
+
+deps()
+{
+	go list -f '{{ join .Deps  "\n"}}' . | grep $1
+}
+
+imports()
+{
+	go list -f '{{ join .Imports "\n" }}' $1
+}
+

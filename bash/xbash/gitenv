@@ -1,0 +1,33 @@
+
+# git related
+if [ -f ~/.git-completion.bash ]; then
+	. ~/.git-completion.bash
+fi
+
+# setup the git branch name in the prompt
+#
+function parse_git_branch () 
+{
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+function parse_git_tag () 
+{
+	git describe --tags 2> /dev/null
+}
+
+function parse_git_branch_or_tag() 
+{
+	local OUT="$(parse_git_branch)"
+	if [ "$OUT" == " ((no branch))" ]; then
+		OUT="($(parse_git_tag))";
+	fi
+	echo $OUT
+}
+PS1="\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\$(parse_git_branch_or_tag) %"
+
+# git aliases
+alias glog='git log --pretty=oneline'
+alias ginfo='git remote show origin'
+alias ginfo_='git remote show origin -n | grep "Fetch URL:" | sed -E "s#^.*/(.*)$#\1#" | sed "s#.git$##"'
+
